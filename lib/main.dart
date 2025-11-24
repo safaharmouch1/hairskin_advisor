@@ -148,6 +148,43 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
         ];
     }
   }
+  Widget buildTipsCard(String title, List<String> tips){
+    return FadeTransition(opacity: _fadeAnimation,
+    child: Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(color: Colors.black12, blurRadius: 10, spreadRadius: 2),
+
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title,
+          style: GoogleFonts.poppins(fontSize: 20, 
+          FontWeight: FontWeight.w600,
+          color: Colors.pink.shade400)),
+          const SizedBox(height: 10,), 
+          ...tips.map(
+           (t) => Padding(padding: const.favorite, color: Colors.pink.shade200, size: 18),
+           const SizedBox(width: 8),
+           Expanded(
+            child: Text(
+              t,
+              style: GoogleFonts.poppins(fontSize: 14),
+            ),
+           ),
+
+          )
+        ],
+      ),
+    ),
+    );
+  }
 
   
   @override
