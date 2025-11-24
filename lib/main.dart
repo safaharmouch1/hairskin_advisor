@@ -178,7 +178,7 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
               style: GoogleFonts.poppins(fontSize: 14),
             ),
            ),
-
+        
           )
         ],
       ),
@@ -186,12 +186,170 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
     );
   }
 
+
   
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: const Color(0xfffbe9f0),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.pink.shade300,
+        title: Text(
+          "Hair & Skin Advisor",
+          style: GoogleFonts.poppins(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+       body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+         ntainer(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(18),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black12, blurRadius: 8, spreadRadius: 2),
+                ],
+                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Select Hair Type",
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  DropdownButton<String>(
+                    value: selectedHair,
+                    isExpanded: true,
+                    hint: const Text("Choose hair type"),
+                    items: hairTypes
+                        .map(
+                          (type) => DropdownMenuItem(
+                            value: type,
+                            child: Text(type),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedHair = value;
+                      });
+
+                      },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+             Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(18),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black12, blurRadius: 8, spreadRadius: 2),
+                ],
+              ),
+
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Select Skin Type",
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                   DropdownButton<String>(
+                    value: selectedSkin,
+                    isExpanded: true,
+                    hint: const Text("Choose skin type"),
+                    items: skinTypes
+                        .map(
+                          (type) => DropdownMenuItem(
+                            value: type,
+                            child: Text(type),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedSkin = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+           const SizedBox(height: 25),
+           Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    if (selectedHair != null && selectedSkin != null) {
+                      setState(() {
+                        showResults = true;
+                      });
+                      _controller.forward(from: 0);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.pink.shade300,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text("Generate"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      showResults = false;
+                      selectedHair = null;
+                      selectedSkin = null;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey.shade400,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text("Clear"),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 25),
+
+            // Results
+            if (showResults) ...[
+              buildTipsCard("Hair Routine Tips", getHairTips()),
+              buildTipsCard("Skin Routine Tips", getSkinTips()),
+            ]
+          ],
+        ),
+      ),
+    );
   }
 }
+
 
 
   
