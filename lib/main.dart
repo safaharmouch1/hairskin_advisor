@@ -102,6 +102,53 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
         ];
     }
   }
+
+  List<String> getskinTypes() {
+    switch (selectedSkin) {
+      case 'Dry':
+      return [
+          'Use hydrating cleanser.',
+          'Moisturize twice a day.',
+          'Apply hyaluronic acid.',
+          'Avoid hot water on the face.',
+          'Use thick night cream.',
+        ];
+        case 'Oily': 
+        return [
+         'Use gel-based moisturizer.',
+          'Avoid heavy oils.',
+          'Use niacinamide daily.',
+          'Wash face twice a day only.',
+          'Use clay mask once a week.',
+        ];
+
+        case 'Sensitive':
+        return[
+          'Avoid fragrances.',
+          'Use soothing products like aloe vera.',
+          'Test products before applying.',
+          'Avoid scrubs.',
+          'Use sunscreen for sensitive skin.',
+        ];
+        case 'Combination':
+        return [
+          'Use lightweight moisturizer in T-zone.',
+          'Apply hydrating cream on dry areas.',
+          'Use gentle cleanser.',
+          'Avoid over-washing.',
+          'Use clay mask on oily areas only.',
+        ];
+        default:
+        return [
+          'Use balanced skincare routine.',
+          'Cleanse morning & night.',
+          'Use vitamin C serum.',
+          'Exfoliate 1–2 times per week.',
+          'Wear sunscreen every day.',
+        ];
+    }
+  }
+
   
   @override
   Widget build(BuildContext context) {
