@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 void main() {
   runApp(const BeautyAdvisorApp());
 }
@@ -7,12 +8,11 @@ void main() {
 class BeautyAdvisorApp extends StatelessWidget {
   const BeautyAdvisorApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BeautyAdvisorApp(),
+      home: BaetyAdvisorPage(),
     );
   }
 }
@@ -32,43 +32,43 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
 
-  final hairTypes =[
+  final hairTypes = [
     'Dry',
     'Oily',
     'Curly',
     'Damaged',
     'Normal',
-
   ];
 
-  final skinTypes =[
+  final skinTypes = [
     'Dry',
     'Oily',
     'Sensitive',
-    'Combination'
-    'Normal'
+    'Combination',
+    'Normal',
   ];
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 700),);
-
-    _fadeAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeIn,);
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 700),
+    );
+    _fadeAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
   }
 
-  List<String> getHairTipes(){
-    switch (selectedHair){
+  List<String> getHairTips() {
+    switch (selectedHair) {
       case 'Dry':
-       return [
+        return [
           'Use sulfate-free shampoo.',
           'Apply deep conditioner twice a week.',
           'Avoid heat styling when possible.',
           'Use argan or coconut oil on ends.',
           'Wash only 2–3 times per week.',
         ];
-        case 'Oily' :
+      case 'Oily':
         return [
           'Use lightweight shampoo.',
           'Avoid applying conditioner on the scalp.',
@@ -76,15 +76,15 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
           'Use dry shampoo when needed.',
           'Avoid touching your hair often.',
         ];
-       case 'Curly' :
-       return [
+      case 'Curly':
+        return [
           'Use curl-enhancing cream.',
           'Avoid brushing dry hair.',
           'Use diffuser with low heat.',
           'Deep moisturize weekly.',
           'Use silk pillowcase at night.',
         ];
-        case "Damaged" :
+      case 'Damaged':
         return [
           'Trim the ends regularly.',
           'Use protein-rich masks weekly.',
@@ -92,7 +92,7 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
           'Reduce heat styling as much as possible.',
           'Use leave-in repair cream.',
         ];
-        default:
+      default:
         return [
           'Use mild cleansing shampoo.',
           'Condition after each wash.',
@@ -103,34 +103,33 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
     }
   }
 
-  List<String> getskinTypes() {
+  List<String> getSkinTips() {
     switch (selectedSkin) {
       case 'Dry':
-      return [
+        return [
           'Use hydrating cleanser.',
           'Moisturize twice a day.',
           'Apply hyaluronic acid.',
           'Avoid hot water on the face.',
           'Use thick night cream.',
         ];
-        case 'Oily': 
+      case 'Oily':
         return [
-         'Use gel-based moisturizer.',
+          'Use gel-based moisturizer.',
           'Avoid heavy oils.',
           'Use niacinamide daily.',
           'Wash face twice a day only.',
           'Use clay mask once a week.',
         ];
-
-        case 'Sensitive':
-        return[
+      case 'Sensitive':
+        return [
           'Avoid fragrances.',
           'Use soothing products like aloe vera.',
           'Test products before applying.',
           'Avoid scrubs.',
           'Use sunscreen for sensitive skin.',
         ];
-        case 'Combination':
+      case 'Combination':
         return [
           'Use lightweight moisturizer in T-zone.',
           'Apply hydrating cream on dry areas.',
@@ -138,7 +137,7 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
           'Avoid over-washing.',
           'Use clay mask on oily areas only.',
         ];
-        default:
+      default:
         return [
           'Use balanced skincare routine.',
           'Cleanse morning & night.',
@@ -148,46 +147,55 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
         ];
     }
   }
-  Widget buildTipsCard(String title, List<String> tips){
-    return FadeTransition(opacity: _fadeAnimation,
-    child: Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 10, spreadRadius: 2),
 
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title,
-          style: GoogleFonts.poppins(fontSize: 20, 
-          FontWeight: FontWeight.w600,
-          color: Colors.pink.shade400)),
-          const SizedBox(height: 10,), 
-          ...tips.map(
-           (t) => Padding(padding: const.favorite, color: Colors.pink.shade200, size: 18),
-           const SizedBox(width: 8),
-           Expanded(
-            child: Text(
-              t,
-              style: GoogleFonts.poppins(fontSize: 14),
+  Widget buildTipsCard(String title, List<String> tips) {
+    return FadeTransition(
+      opacity: _fadeAnimation,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            BoxShadow(color: Colors.black12, blurRadius: 10, spreadRadius: 2),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: GoogleFonts.poppins(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Colors.pink,
+              ),
             ),
-           ),
-        
-          )
-        ],
+            const SizedBox(height: 10),
+            ...tips.map(
+              (t) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Row(
+                  children: [
+                    Icon(Icons.check, color: Colors.pink.shade200, size: 18),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        t,
+                        style: GoogleFonts.poppins(fontSize: 14),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
     );
   }
 
-
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,20 +211,19 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
           ),
         ),
       ),
-       body: SingleChildScrollView(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-         ntainer(
+            Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(18),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black12, blurRadius: 8, spreadRadius: 2),
+                boxShadow: const [
+                  BoxShadow(color: Colors.black12, blurRadius: 8, spreadRadius: 2),
                 ],
-                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -232,35 +239,27 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
                     isExpanded: true,
                     hint: const Text("Choose hair type"),
                     items: hairTypes
-                        .map(
-                          (type) => DropdownMenuItem(
-                            value: type,
-                            child: Text(type),
-                          ),
-                        )
+                        .map((type) => DropdownMenuItem(value: type, child: Text(type)))
                         .toList(),
                     onChanged: (value) {
                       setState(() {
                         selectedHair = value;
                       });
-
-                      },
+                    },
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 20),
-             Container(
+            Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(18),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black12, blurRadius: 8, spreadRadius: 2),
+                boxShadow: const [
+                  BoxShadow(color: Colors.black12, blurRadius: 8, spreadRadius: 2),
                 ],
               ),
-
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -271,17 +270,12 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                   DropdownButton<String>(
+                  DropdownButton<String>(
                     value: selectedSkin,
                     isExpanded: true,
                     hint: const Text("Choose skin type"),
                     items: skinTypes
-                        .map(
-                          (type) => DropdownMenuItem(
-                            value: type,
-                            child: Text(type),
-                          ),
-                        )
+                        .map((type) => DropdownMenuItem(value: type, child: Text(type)))
                         .toList(),
                     onChanged: (value) {
                       setState(() {
@@ -292,8 +286,8 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
                 ],
               ),
             ),
-           const SizedBox(height: 25),
-           Row(
+            const SizedBox(height: 25),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
@@ -307,8 +301,7 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.pink.shade300,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -325,8 +318,7 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey.shade400,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -335,21 +327,14 @@ class _BaetyAdvisorPageState extends State<BaetyAdvisorPage> with SingleTickerPr
                 ),
               ],
             ),
-
             const SizedBox(height: 25),
-
-            // Results
             if (showResults) ...[
               buildTipsCard("Hair Routine Tips", getHairTips()),
               buildTipsCard("Skin Routine Tips", getSkinTips()),
-            ]
+            ],
           ],
         ),
       ),
     );
   }
 }
-
-
-
-  
