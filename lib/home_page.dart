@@ -31,6 +31,50 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+     return Scaffold(
+      appBar: AppBar(
+        title: const Text("HairSkin Advisor"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.history),
+            onPressed: () => Navigator.pushNamed(context, "/history"),
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () async {
+              await Session.logout();
+              if (!context.mounted) return;
+              Navigator.pushReplacementNamed(context, "/auth");
+            },
+          ),
+        ],
+      ),
+       body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: inputC,
+              decoration: const InputDecoration(
+                labelText: "Describe your issue",
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: _generateAndSave,
+              child: const Text("Generate & Save"),
+            ),
+            const SizedBox(height: 12),
+            if (resultText.isNotEmpty)
+              Text(
+                resultText,
+                style: const TextStyle(fontSize: 16),
+              ),
+          ],
+        ),
+      ),
+    );
   }
+     
 }
