@@ -61,6 +61,38 @@ if (res.statusCode != 200 || data["ok"] != true) {
   }
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: Text(isLogin ? "Login" : "Register")),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: emailC,
+              decoration: const InputDecoration(labelText: "Email"),
+            ),
+             TextField(
+              controller: passC,
+              decoration: const InputDecoration(labelText: "Password"),
+              obscureText: true,
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: loading ? null : _submit,
+              child: Text(loading ? "Please wait..." : (isLogin ? "Login" : "Create account")),
+            ),
+            TextButton(
+              onPressed: () => setState(() => isLogin = !isLogin),
+              child: Text(isLogin ? "Create new account" : "I already have an account"),
+            ),
+            if (error.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text(error, style: const TextStyle(color: Colors.red)),
+              ),
+          ],
+        ),
+      ),
+    );
   }
 }
